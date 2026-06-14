@@ -7,4 +7,3 @@ scikit-image
 opencv-python
 Pillow
 jupyter
-seaborn

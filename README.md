@@ -1,4 +1,4 @@
-# Klasifikasi Citra Slingbag dan Totebag Menggunakan HOG-SVM, MobileNetV2, dan EfficientNetB0
+# Klasifikasi Citra Slingbag dan Totebag Menggunakan HOG-SVM dan MobileNetV2
 
 ## Deskripsi
 
@@ -7,7 +7,7 @@ Proyek ini bertujuan untuk melakukan klasifikasi citra tas berdasarkan dua kateg
 - Slingbag
 - Totebag
 
-Penelitian membandingkan performa metode Machine Learning tradisional (HOG + SVM) dengan metode Deep Learning berbasis Transfer Learning menggunakan MobileNetV2 dan EfficientNetB0.
+Penelitian membandingkan performa metode Machine Learning tradisional (HOG + SVM) dengan metode Deep Learning berbasis Transfer Learning menggunakan MobileNetV2.
 
 ---
 
@@ -23,7 +23,7 @@ Dataset terdiri dari:
 
 Seluruh gambar diproses menjadi ukuran:
 
-256 × 256 piksel
+**256 × 256 piksel**
 
 ---
 
@@ -45,7 +45,7 @@ Hasil pembagian:
 
 Verifikasi dilakukan untuk memastikan tidak terjadi data leakage.
 
-```
+```text
 Train-Test: 0
 Train-Validation: 0
 Validation-Test: 0
@@ -60,8 +60,16 @@ Validation-Test: 0
 Tahapan:
 
 - Image Resizing
+- Data Augmentation
 - HOG Feature Extraction
+- Feature Scaling
 - Support Vector Machine (SVM)
+
+Kernel yang diuji:
+
+- RBF
+- Polynomial
+- Linear
 
 ### 2. MobileNetV2
 
@@ -70,26 +78,19 @@ Transfer Learning menggunakan:
 - ImageNet Pretrained Weights
 - Data Augmentation
 - GlobalAveragePooling2D
-- Dense Layer
-
-### 3. EfficientNetB0
-
-Transfer Learning menggunakan:
-
-- ImageNet Pretrained Weights
-- Data Augmentation
-- GlobalAveragePooling2D
-- Dense Layer
+- Dropout
+- Dense Output Layer
+- Early Stopping
+- Model Checkpoint
 
 ---
 
 ## Hasil Eksperimen
 
-| Model          | Accuracy |
-| -------------- | -------: |
-| HOG + SVM      |   92.00% |
-| MobileNetV2    |  100.00% |
-| EfficientNetB0 |   99.33% |
+| Model           | Accuracy |
+| --------------- | -------: |
+| HOG + SVM (RBF) |   97.33% |
+| MobileNetV2     |  100.00% |
 
 ---
 
@@ -98,25 +99,18 @@ Transfer Learning menggunakan:
 ```text
 notebooks/
 
-01_Dataset.ipynb
-02_Preprocessing.ipynb
-03_Data_Split.ipynb
-04_HOG_SVM.ipynb
-05_MobileNetV2_TransferLearning.ipynb
-06_EfficientNetB0.ipynb
-07_Model_Comparison.ipynb
-08_Demo_Prediction.ipynb
+UAS_Slingbag_Totebag.ipynb
 
 results/
 
-confusion-matrix-EfficientNetB0.png
-confusion-matrix-mobilenetv2.png
-EfficientNetB0-accuracy.png
-EfficientNetB0-Loss.png
-HOG+SVM-ConfusionMatrix.png
-mobilenetv2-accuracy.png
-mobilenetv2-loss.png
-comparison_accuracy.png
+HOG_SVM_RBF_ConfusionMatrix.png
+MobileNetV2_Accuracy.png
+MobileNetV2_Loss.png
+MobileNetV2_ConfusionMatrix.png
+Model_Comparison.png
+
+README.md
+requirements.txt
 ```
 
 ---
@@ -127,13 +121,13 @@ Dataset tidak disertakan secara langsung pada repository karena ukuran file yang
 
 Dataset dapat diakses melalui Google Drive:
 
-[https://drive.google.com/drive/folders/1mzHUwoo-mk3xkPJalf2zmxlBhSnieyWY?usp=drive_link]
+https://drive.google.com/drive/folders/1mzHUwoo-mk3xkPJalf2zmxlBhSnieyWY?usp=drive_link
 
 Isi folder Google Drive:
 
 - Dataset Slingbag & Totebag (dataset asli)
-- Dataset_256_Preprocessing (hasil resize 256×256)
-- Dataset_Split (train, validation, test)
+- Dataset_256_Preprocessing
+- Dataset_Split_UAS
 
 Dataset terdiri dari:
 
@@ -146,25 +140,45 @@ Total : 1000 gambar
 
 ## Cara Menjalankan
 
-1. Clone repository
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/username/repository.git
 ```
 
-2. Install dependency
+### 2. Masuk ke Folder Repository
+
+```bash
+cd repository
+```
+
+### 3. Install Dependency
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Jalankan notebook sesuai urutan.
+### 4. Jalankan Notebook
+
+Buka Jupyter Notebook atau Google Colab kemudian jalankan notebook:
+
+```text
+UAS_Slingbag_Totebag.ipynb
+```
+
+---
+
+## Kesimpulan
+
+Berdasarkan hasil eksperimen, model MobileNetV2 memperoleh performa terbaik dengan akurasi sebesar 100.00%, sedangkan model HOG + SVM dengan kernel RBF memperoleh akurasi sebesar 97.33%.
+
+Hasil tersebut menunjukkan bahwa pendekatan Deep Learning berbasis Transfer Learning mampu menghasilkan performa klasifikasi yang lebih tinggi dibandingkan metode Machine Learning berbasis fitur handcrafted HOG pada dataset Slingbag dan Totebag.
 
 ---
 
 ## Author
 
-Nama: Akmallullail Sya'ban
+**Akmallullail Sya'ban**
 
 NIM: 2310817310010
 
